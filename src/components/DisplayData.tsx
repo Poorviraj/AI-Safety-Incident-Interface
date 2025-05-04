@@ -35,7 +35,7 @@ const DisplayData: React.FC<DisplayDataProps> = ({ incidents }) => {
         <select
           value={severityFilter}
           onChange={(e) => setSeverityFilter(e.target.value as any)}
-          className='border border-black p-2 rounded'
+          className='border border-black p-2 rounded hover:border-blue-400 transition duration-300 ease-in-out cursor-pointer '
         >
           <option value="All">All Severities</option>
           <option value="Low">Low</option>
@@ -46,7 +46,7 @@ const DisplayData: React.FC<DisplayDataProps> = ({ incidents }) => {
         <select
           value={sortOrder}
           onChange={(e) => setSortOrder(e.target.value as any)}
-          className='border border-black p-2 rounded'
+          className='border border-black p-2 rounded hover:border-blue-400 transition duration-300 ease-in-out cursor-pointer '
         >
           <option value="Newest">Newest First</option>
           <option value="Oldest">Oldest First</option>
@@ -59,14 +59,14 @@ const DisplayData: React.FC<DisplayDataProps> = ({ incidents }) => {
           <p>No incidents match your criteria.</p>
         ) : (
           sorted.map((incident) => (
-            <div key={incident.id} className='border border-gray-400 rounded-md p-4 w-[80%]'>
+            <div key={incident.id} className={`border border-gray-400 rounded-md p-4 w-[80%] transition duration-300 ease-in-out ${incident.severity === 'High' ? 'hover:border-red-500' : incident.severity === 'Medium' ? 'hover:border-yellow-500' : 'hover:border-green-500'}`}>
               <h3 className='font-bold text-lg'>{incident.title}</h3>
-              <p>Severity: {incident.severity}</p>
-              <p>Reported At: {new Date(incident.date).toLocaleDateString()}</p>
+              <p className=' font-semibold ' >Severity: <span className='font-normal' >{incident.severity}</span></p>
+              <p><span className=' font-semibold ' >Reported At:</span> {new Date(incident.date).toLocaleDateString()}</p>
 
               <button
                 onClick={() => toggleExpand(incident.id)}
-                className='bg-blue-600 font-semibold text-white mt-2 cursor-pointer rounded-2xl border-2 border-blue-600 p-1'
+                className='border-blue-600 mt-2 cursor-pointer rounded-2xl border-2 p-1  text-blue-500  hover:bg-blue-500 hover:text-white transition duration-300 ease-in-out'
               >
                 {expandedIds.includes(incident.id) ? 'Hide Details' : 'View Details'}
               </button>

@@ -11,7 +11,7 @@ const Main: React.FC = () => {
   };
 
   return (
-    <div className='flex flex-col justify-center bg-[#E6F4FE]'>
+    <div className='flex flex-col justify-center bg-[#E6F4FE] min-h-screen '>
       <AddIncident onAdd={handleAdd} incidents={incidents} />
       <DisplayData incidents={incidents} />
     </div>
